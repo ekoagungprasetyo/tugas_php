@@ -26,11 +26,11 @@
         }
 
         tr:nth-child(even) td {
-            background-color: #D3D3D3; 
+            background-color: white ; 
         }
 
         tr:nth-child(odd) td {
-            background-color: white; 
+            background-color: #D3D3D3; 
         }
     </style>
 </head>
