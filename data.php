@@ -11,7 +11,7 @@
 
 
     	body {
-    		font-family: 'Open Sans', sans-serif;
+    		font-family: 'Noto Sans JP', sans-serif;
     	}
         table {
             width: 100%;
