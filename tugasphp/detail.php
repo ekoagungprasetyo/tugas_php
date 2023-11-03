@@ -1,14 +1,16 @@
 <?php include("koneksi.php");
- $query = mysqli_query($connection, "SELECT * FROM user_details ");
+ $query = mysqli_query($connection, "SELECT * FROM order_detail ");
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
 
+        
 
     	body {
     		font-family: 'Noto Sans JP', sans-serif;
@@ -50,31 +52,43 @@
     </style>
 </head>
 <body>
+    <div class="col-md-12 text-center mb-5 mt-5">
+
+
+       <a href="data.php"> User Detail </a>|
+       <a href="detail.php"> Detail Pesanan </a>|
+       <a href="barang.php"> Barang </a>
+
+    </div class "col-md-12">
+     <h3> Data Detail Pesanan</h3>
+     <a class='fcc-btn1' href='tambah_detail_pesanan.php'> Tambah </a>
     <form action="" method="post">
         <table border="1">
             <tr>
-                <th>user_id</th>
-                <th>username</th>
-                <th>first_name</th>
-                <th>last_name</th>
-                <th>gender</th>
-                <th>password</th>
+                <th>id_order</th>
+                <th>jumlah_order</th>
+                <th>harga</th>
+                <th>jenis barang</th>
+                <th>total</th>
                 <th>Action</th>
+               
             </tr>
 
             <?php if(mysqli_num_rows($query)>0){?>
                 <?php
                 while ($data = mysqli_fetch_array($query)) {
                     echo "<tr>";
-                    echo "<td>" . $data['user_id'] . "</td>";
-                    echo "<td>" . $data['username'] . "</td>";
-                    echo "<td>" . $data['first_name'] . "</td>";
-                    echo "<td>" . $data['last_name'] . "</td>";
-                    echo "<td>" . $data['gender'] . "</td>";
-                    echo "<td>" . $data['password'] . "</td>";
+                     echo "<td>" . $data['id_order'] . "</td>";
+                    echo "<td>" . $data['jumlah_order'] . "</td>";
+                   
+                    
+                    echo "<td>" . "Rp" . number_format($data['harga']) . "</td>";
+                    echo "<td>" . $data['jenis_barang'] . "</td>";
+                    echo "<td>". "Rp" . number_format($data['total']) . "</td>";
+                    
                     echo "<td>";
-                    echo "<a class='fcc-btn1' href='#'><i class='fas fa-edit'></i> Edit</a> ";
-                    echo "<a class='fcc-btn2' href='#'><i class='fas fa-trash-alt'></i> Hapus</a>";
+                    echo "<a class='fcc-btn1' href='form_edit_detailpesanan.php?data=".$data['id_order']."'><i class='fas fa-edit'></i> Edit</a> ";
+                    echo "<a class='fcc-btn2' href='proses_hapuspesanan.php?delete_id=".$data['id_order']."'><i class='fas fa-trash-alt'></i> Hapus</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
